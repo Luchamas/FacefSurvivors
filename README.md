@@ -33,37 +33,50 @@ Para gerar o executável: **File → Build Profiles → Windows → Build**.
 - **Personagem**: o Mascote FACEF, com animação de corrida (2 quadros) e respiração quando parado.
 - **Cenário**: piso de ladrilhos brancos infinito, com mesas redondas espalhadas que bloqueiam
   o jogador e os inimigos (os inimigos contornam as mesas). O layout muda a cada partida.
-- **7 armas** (8 níveis cada): Caneta, Lápis, Régua, Livros, Café, Relâmpago e HP 12C.
-- **9 itens passivos**: Vitamina C, Tênis de Corrida, Energético, Agenda, Óculos, Ímã, Marmita, Moletom e Xerox.
+- **7 armas** (8 níveis cada), cada uma uma linguagem de programação: TypeScript, Dart, Haskell, Lua, Elixir, Zig e Fortran.
+- **9 itens passivos**, também linguagens: PHP, Swift, C#, Go, JavaScript, Python, Java, Rust e C++.
 - **Inimigos**: estudantes! Calouro, Atrasado, Sonolento, Veterano, Nerd e Repetente, com ondas que mudam
   a cada minuto, além de super ondas (correrias e cercos) anunciadas com o sinal e o aviso **Hora do Intervalo!**
 - **Chefes**: a *Prova Surpresa* aparece aos 5:00 e deixa cair um baú. *O TCC* aparece aos 10:00 e é a luta final.
 - **Coletáveis**: gemas de XP, coxinha (recupera vida), ímã (puxa todas as gemas) e baú (3 melhorias grátis).
 - Tela de fim de jogo com tempo, nível, abates e dano causado por cada arma.
 
-Imagens importadas (em `Assets/Resources`):
+## Imagens e sons
 
-| Arquivo | Uso |
+Todas as imagens são arquivos prontos em `Assets/Resources`; nenhum gráfico é desenhado por código.
+
+| Arquivo / pasta | Uso |
 |---|---|
 | `UI/Logo.png` | Logo do menu |
+| `UI/Kenney/` | Interface: painéis, botões (normal, destacado e pressionado), slots, barras (XP, vida, chefe e sliders), alça dos sliders e vinheta (fundo do menu e aviso de dano) |
 | `Sprites/Mascot_Idle.png`, `Sprites/Mascot_Run.png` | Quadros do personagem (mesmo tamanho, pés alinhados, desenho olhando para a direita) |
 | `Sprites/Floor.png` | Piso: 3 x 2 ladrilhos, repetível |
 | `Sprites/Table.png` | Mesa com 6 cadeiras vista de cima (com sombra) |
+| `Sprites/Students/<personagem>/` | Quadros dos estudantes (`walk0`–`walk7` e `run0`–`run2`, olhando para a direita): `MaleAdventurer` (Calouro), `FemaleAdventurer` (Atrasado, correndo), `Zombie` (Sonolento), `FemalePerson` (Veterano), `Robot` (Nerd) e `MalePerson` (Repetente) |
+| `Sprites/Bosses/` | `Prova.png` (Prova Surpresa) e `TCC.png` (O TCC) |
+| `Sprites/Languages/` | Logos das linguagens: ícones das armas e passivos, e projéteis de TypeScript, Dart, Fortran e Lua |
+| `Sprites/Items/` | Gemas de XP (`GemBlue`, `GemGreen` e `GemRed`, conforme o valor), baú (`Chest`) e ímã (`Magnet`) |
+| `Sprites/Pixel/Coxinha.png` | Coxinha. Tudo em `Sprites/Pixel/` é importado sem suavização (pixel art) |
+| `Sprites/Effects/` | Partículas (`Dot`), aura do Elixir (`Disc`), anéis de impacto (`Ring`), sombras (`Shadow`), golpe do Haskell (`Slash`) e raios do Zig (`Lightning0` e `Lightning1`) |
+| `Audio/Soundtrack.mp3` | Música, tocada em loop |
 
-Os estudantes, armas e itens são pixel art gerada por código, e os sons (8-bit) também são sintetizados em código.
+Imagens novas em `Sprites/` ou `UI/` e músicas em `Audio/` são configuradas sozinhas ao serem importadas
+(`ProjectSetup.cs`). Para trocar uma imagem, substitua o PNG mantendo o mesmo nome.
+
+Os efeitos sonoros (estilo 8-bit) são sintetizados em código, em `AudioManager.cs`.
 
 ## Estrutura do código
 
 ```
 Assets/Scripts/
-  Core/       GameSettings (opções salvas), AudioManager (sons sintetizados), Art e PixelArt (gráficos),
-              UI (fábrica de interface), Bootstrap
+  Core/       GameSettings (opções salvas), AudioManager (efeitos sintetizados e música),
+              Art (carrega as imagens e define tamanho, pivô e 9-slice), UI (fábrica de interface), Bootstrap
   Data/       Definitions (classes de dados) e Database (personagens, armas, passivos, inimigos)
   Game/       GameController (estados da partida), Player, EnemyManager (ondas, chefes, colisão),
               Weapons, Projectiles, PickupManager, Effects, HUD, Upgrades, World (câmera e piso),
               Obstacles (mesas: layout, colisão e desvio)
   Menu/       MainMenuController e OptionsPanel
-  Editor/     ProjectSetup (cria cenas e configura o Build)
+  Editor/     ProjectSetup (cria cenas, configura o Build e a importação de imagens e música)
 ```
 
 Tudo é montado por código a partir de dois objetos nas cenas: `MainMenu` (com `MainMenuController`)
@@ -78,6 +91,8 @@ e `Game` (com `GameController`). Não há prefabs para configurar.
   Tamanho e velocidade da animação: constantes no topo de `Player.cs`.
 - **Mesas** (espaçamento, raio de colisão, quantidade): constantes no topo de `Assets/Scripts/Game/Obstacles.cs`.
 - **Tamanho dos ladrilhos do piso**: `GroundTiler.TileWorld` em `World.cs`.
-- **Desenhos**: em `Assets/Scripts/Core/Art.cs` cada sprite é um desenho em texto (um caractere por pixel).
+- **Imagens**: os arquivos ficam em `Assets/Resources` (veja a tabela acima); o tamanho no mundo, o pivô
+  e as bordas 9-slice de cada uma são definidos em `Assets/Scripts/Core/Art.cs`.
 - **Nova arma**: crie uma classe que herda de `Weapon` (ou `BurstWeapon`) em `Weapons.cs`
-  e adicione um `WeaponDef` na lista `Database.Weapons`.
+  e adicione um `WeaponDef` na lista `Database.Weapons`, com o logo da linguagem em `Sprites/Languages/`
+  como ícone (`Icon = () => Art.Language("Nome")`).
