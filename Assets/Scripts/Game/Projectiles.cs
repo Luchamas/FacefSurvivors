@@ -17,7 +17,7 @@ namespace FacefSurvivors
         public readonly List<Enemy> HitList = new List<Enemy>(8);
     }
 
-    /// <summary>Projéteis com pool (logos de TypeScript, Dart, Fortran...).</summary>
+    /// <summary>Projéteis com pool (logos de TypeScript, Dart, C...).</summary>
     public class ProjectileManager : MonoBehaviour
     {
         public static ProjectileManager Instance { get; private set; }

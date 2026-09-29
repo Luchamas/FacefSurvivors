@@ -33,7 +33,7 @@ Para gerar o executável: **File → Build Profiles → Windows → Build**.
 - **Personagem**: o Mascote FACEF, com animação de corrida (2 quadros) e respiração quando parado.
 - **Cenário**: piso de ladrilhos brancos infinito, com mesas redondas espalhadas que bloqueiam
   o jogador e os inimigos (os inimigos contornam as mesas). O layout muda a cada partida.
-- **7 armas** (8 níveis cada), cada uma uma linguagem de programação: TypeScript, Dart, Haskell, Lua, Elixir, Zig e Fortran.
+- **7 armas** (8 níveis cada), cada uma uma linguagem de programação: TypeScript, Dart, Bash, Lua, HTML/CSS, SQL e C.
 - **9 itens passivos**, também linguagens: PHP, Swift, C#, Go, JavaScript, Python, Java, Rust e C++.
 - **Inimigos**: estudantes! Calouro, Atrasado, Sonolento, Veterano, Nerd e Repetente, com ondas que mudam
   a cada minuto, além de super ondas (correrias e cercos) anunciadas com o sinal e o aviso **Hora do Intervalo!**
@@ -54,10 +54,10 @@ Todas as imagens são arquivos prontos em `Assets/Resources`; nenhum gráfico é
 | `Sprites/Table.png` | Mesa com 6 cadeiras vista de cima (com sombra) |
 | `Sprites/Students/<personagem>/` | Quadros dos estudantes (`walk0`–`walk7` e `run0`–`run2`, olhando para a direita): `MaleAdventurer` (Calouro), `FemaleAdventurer` (Atrasado, correndo), `Zombie` (Sonolento), `FemalePerson` (Veterano), `Robot` (Nerd) e `MalePerson` (Repetente) |
 | `Sprites/Bosses/` | `Prova.png` (Prova Surpresa) e `TCC.png` (O TCC) |
-| `Sprites/Languages/` | Logos das linguagens: ícones das armas e passivos, e projéteis de TypeScript, Dart, Fortran e Lua |
+| `Sprites/Languages/` | Logos das linguagens: ícones das armas e passivos, e projéteis de TypeScript, Dart, C e Lua |
 | `Sprites/Items/` | Gemas de XP (`GemBlue`, `GemGreen` e `GemRed`, conforme o valor), baú (`Chest`) e ímã (`Magnet`) |
 | `Sprites/Pixel/Coxinha.png` | Coxinha. Tudo em `Sprites/Pixel/` é importado sem suavização (pixel art) |
-| `Sprites/Effects/` | Partículas (`Dot`), aura do Elixir (`Disc`), anéis de impacto (`Ring`), sombras (`Shadow`), golpe do Haskell (`Slash`) e raios do Zig (`Lightning0` e `Lightning1`) |
+| `Sprites/Effects/` | Partículas (`Dot`), aura do HTML/CSS (`Disc`), anéis de impacto (`Ring`), sombras (`Shadow`), golpe do Bash (`Slash`) e raios do SQL (`Lightning0` e `Lightning1`) |
 | `Audio/Soundtrack.mp3` | Música, tocada em loop |
 
 Imagens novas em `Sprites/` ou `UI/` e músicas em `Audio/` são configuradas sozinhas ao serem importadas

@@ -149,7 +149,7 @@ namespace FacefSurvivors
         /// <summary>Sombra oval de 1 x 0,5 unidade.</summary>
         public static Sprite Shadow => Sized("Sprites/Effects/Shadow", 1f);
 
-        /// <summary>Arco do golpe do Haskell, 2 x 1 unidades.</summary>
+        /// <summary>Arco do golpe do Bash, 2 x 1 unidades.</summary>
         public static Sprite Slash => Sized("Sprites/Effects/Slash", 2f);
 
         /// <summary>Raio com 8 unidades de altura, pivô embaixo (onde ele cai).</summary>

@@ -159,9 +159,9 @@ namespace FacefSurvivors
         }
     }
 
-    // ==================================================================== Fortran
+    // ==================================================================== C
 
-    public class FortranWeapon : BurstWeapon
+    public class CWeapon : BurstWeapon
     {
         protected override void OnInit()
         {
@@ -172,7 +172,7 @@ namespace FacefSurvivors
         {
             float side = (index % 2 == 0 ? 1f : -1f) * Owner.FacingX;
             var vel = new Vector2(side * Random.Range(1f, 3.2f), Random.Range(9.5f, 11.5f)) * Speed;
-            var p = ProjectileManager.Instance.Fire(this, Art.LanguageInWorld("Fortran"), Owner.Pos, vel, Damage, Raw.Pierce,
+            var p = ProjectileManager.Instance.Fire(this, Art.LanguageInWorld("C"), Owner.Pos, vel, Damage, Raw.Pierce,
                 0.42f * Area, 2.6f, 1.3f * Area, Raw.Knockback);
             p.Gravity = 20f;
             p.Spin = -side * 540f;
@@ -180,9 +180,9 @@ namespace FacefSurvivors
         }
     }
 
-    // ==================================================================== Haskell
+    // ==================================================================== Bash
 
-    public class HaskellWeapon : Weapon
+    public class BashWeapon : Weapon
     {
         struct PendingStrike
         {
@@ -309,27 +309,31 @@ namespace FacefSurvivors
         }
     }
 
-    // ==================================================================== Elixir
+    // ==================================================================== HTML/CSS
 
-    public class ElixirWeapon : Weapon
+    public class HtmlCssWeapon : Weapon
     {
+        static readonly Color HtmlOrange = new Color(0.89f, 0.31f, 0.15f);
+        static readonly Color CssBlue = new Color(0.08f, 0.45f, 0.71f);
+
         SpriteRenderer aura, ring;
         float bubbleTimer;
+        bool cssBubble;
 
         protected override void OnInit()
         {
-            var go = new GameObject("ElixirAura");
+            var go = new GameObject("HtmlCssAura");
             go.transform.SetParent(Owner.transform, false);
             aura = go.AddComponent<SpriteRenderer>();
             aura.sprite = Art.Disc;
-            aura.color = new Color(0.45f, 0.25f, 0.62f, 0.2f);
+            aura.color = new Color(HtmlOrange.r, HtmlOrange.g, HtmlOrange.b, 0.2f);
             aura.sortingOrder = -40;
 
-            var rgo = new GameObject("ElixirRing");
+            var rgo = new GameObject("HtmlCssRing");
             rgo.transform.SetParent(Owner.transform, false);
             ring = rgo.AddComponent<SpriteRenderer>();
             ring.sprite = Art.Ring;
-            ring.color = new Color(0.78f, 0.6f, 0.95f, 0.4f);
+            ring.color = new Color(CssBlue.r, CssBlue.g, CssBlue.b, 0.45f);
             ring.sortingOrder = -39;
         }
 
@@ -345,7 +349,9 @@ namespace FacefSurvivors
             if (bubbleTimer <= 0f)
             {
                 bubbleTimer = 0.12f;
-                Effects.Instance.Burst(Owner.Pos + Random.insideUnitCircle * radius, new Color(0.55f, 0.35f, 0.75f, 0.7f), 1, 0.6f, 0.08f);
+                cssBubble = !cssBubble;
+                var c = cssBubble ? CssBlue : HtmlOrange;
+                Effects.Instance.Burst(Owner.Pos + Random.insideUnitCircle * radius, new Color(c.r, c.g, c.b, 0.7f), 1, 0.6f, 0.08f);
             }
 
             EnemyManager.Instance.Query(Owner.Pos, radius, Query);
@@ -356,9 +362,9 @@ namespace FacefSurvivors
         }
     }
 
-    // ==================================================================== Zig
+    // ==================================================================== SQL
 
-    public class ZigWeapon : Weapon
+    public class SqlWeapon : Weapon
     {
         readonly List<Enemy> targets = new List<Enemy>(16);
         readonly List<Vector2> targetPos = new List<Vector2>(16);

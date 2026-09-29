@@ -53,10 +53,10 @@ namespace FacefSurvivors
             },
             new WeaponDef
             {
-                Id = WeaponId.Haskell,
-                Name = "Haskell",
-                Description = "Um map() em forma de golpe: atinge todos os inimigos à frente.",
-                Icon = () => Art.Language("Haskell"),
+                Id = WeaponId.Bash,
+                Name = "Bash",
+                Description = "Um rm -rf em forma de golpe: apaga todos os inimigos à frente.",
+                Icon = () => Art.Language("Bash"),
                 Base = new WeaponStats { Damage = 12f, Cooldown = 1.35f, Amount = 1, Area = 1f, Knockback = 4f },
                 Levels = new[]
                 {
@@ -68,7 +68,7 @@ namespace FacefSurvivors
                     new WeaponLevel("+5 de dano.", s => s.Damage += 5f),
                     new WeaponLevel("+10 de dano.", s => s.Damage += 10f),
                 },
-                Create = () => new HaskellWeapon(),
+                Create = () => new BashWeapon(),
             },
             new WeaponDef
             {
@@ -91,10 +91,10 @@ namespace FacefSurvivors
             },
             new WeaponDef
             {
-                Id = WeaponId.Elixir,
-                Name = "Elixir",
-                Description = "Aura de elixir que causa dano contínuo ao redor.",
-                Icon = () => Art.Language("Elixir"),
+                Id = WeaponId.HtmlCss,
+                Name = "HTML/CSS",
+                Description = "Uma div com border-radius: 50% que causa dano contínuo ao redor.",
+                Icon = () => Art.Language("HtmlCss"),
                 Base = new WeaponStats { Damage = 5f, Area = 1f, Knockback = 1f, HitInterval = 0.85f },
                 Levels = new[]
                 {
@@ -106,14 +106,14 @@ namespace FacefSurvivors
                     new WeaponLevel("Acerta mais rápido e +1 de dano.", s => { s.HitInterval -= 0.1f; s.Damage += 1f; }),
                     new WeaponLevel("+20% de área e +2 de dano.", s => { s.Area += 0.2f; s.Damage += 2f; }),
                 },
-                Create = () => new ElixirWeapon(),
+                Create = () => new HtmlCssWeapon(),
             },
             new WeaponDef
             {
-                Id = WeaponId.Zig,
-                Name = "Zig",
-                Description = "Raios em zigue-zague caem sobre inimigos aleatórios na tela.",
-                Icon = () => Art.Language("Zig"),
+                Id = WeaponId.Sql,
+                Name = "SQL",
+                Description = "ORDER BY RANDOM(): raios caem sobre inimigos sorteados na tela.",
+                Icon = () => Art.Language("Sql"),
                 Base = new WeaponStats { Damage = 18f, Cooldown = 4f, Amount = 2, Area = 1f, Knockback = 0.5f },
                 Levels = new[]
                 {
@@ -125,26 +125,26 @@ namespace FacefSurvivors
                     new WeaponLevel("+40% de área e +20 de dano.", s => { s.Area += 0.4f; s.Damage += 20f; }),
                     new WeaponLevel("+1 raio e recarga 0,5s mais rápida.", s => { s.Amount += 1; s.Cooldown -= 0.5f; }),
                 },
-                Create = () => new ZigWeapon(),
+                Create = () => new SqlWeapon(),
             },
             new WeaponDef
             {
-                Id = WeaponId.Fortran,
-                Name = "Fortran",
-                Description = "Fórmulas pesadas lançadas para cima que caem esmagando tudo.",
-                Icon = () => Art.Language("Fortran"),
+                Id = WeaponId.C,
+                Name = "C",
+                Description = "Ponteiros lançados para cima caem onde não deviam: segfault!",
+                Icon = () => Art.Language("C"),
                 Base = new WeaponStats { Damage = 20f, Cooldown = 2.2f, Amount = 1, Area = 1f, Speed = 1f, Pierce = 3, Knockback = 2f },
                 Levels = new[]
                 {
-                    new WeaponLevel("+1 fórmula.", s => s.Amount += 1),
+                    new WeaponLevel("+1 ponteiro.", s => s.Amount += 1),
                     new WeaponLevel("+20 de dano.", s => s.Damage += 20f),
                     new WeaponLevel("Atravessa +2 inimigos.", s => s.Pierce += 2),
-                    new WeaponLevel("+1 fórmula.", s => s.Amount += 1),
+                    new WeaponLevel("+1 ponteiro.", s => s.Amount += 1),
                     new WeaponLevel("+20 de dano.", s => s.Damage += 20f),
                     new WeaponLevel("Atravessa +2 inimigos.", s => s.Pierce += 2),
-                    new WeaponLevel("+1 fórmula e +20 de dano.", s => { s.Amount += 1; s.Damage += 20f; }),
+                    new WeaponLevel("+1 ponteiro e +20 de dano.", s => { s.Amount += 1; s.Damage += 20f; }),
                 },
-                Create = () => new FortranWeapon(),
+                Create = () => new CWeapon(),
             },
         };
 

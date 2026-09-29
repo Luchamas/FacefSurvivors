@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace FacefSurvivors
 {
-    public enum WeaponId { TypeScript, Dart, Haskell, Lua, Elixir, Zig, Fortran }
+    public enum WeaponId { TypeScript, Dart, Bash, Lua, HtmlCss, Sql, C }
 
     public enum PassiveId { CSharp, JavaScript, Java, Swift, Python, Rust, Go, Cpp, Php }
 
