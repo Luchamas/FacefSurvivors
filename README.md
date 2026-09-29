@@ -1,7 +1,7 @@
 # FACEF Survivors
 
 Jogo 2D de sobrevivência no estilo **Vampire Survivors**, feito em Unity.
-Você controla o Mascote FACEF cercado por ondas de estudantes: as armas atacam sozinhas,
+Você controla o Facefinho, o mascote da FACEF, cercado por ondas de estudantes: as armas atacam sozinhas,
 você só se movimenta, coleta gemas de XP e escolhe melhorias a cada nível.
 Sobreviva até **10:00** e derrote **o TCC** para ser **APROVADO**.
 
@@ -30,7 +30,7 @@ Para gerar o executável: **File → Build Profiles → Windows → Build**.
 - **Menu principal**: Jogar, Opções, Créditos e Sair, com fundo animado.
 - **Opções**: volume geral, música e efeitos, tela cheia, resolução, VSync, números de dano,
   tremor de tela e contador de FPS. Tudo fica salvo e as mesmas opções aparecem no menu de pausa.
-- **Personagem**: o Mascote FACEF, com animação de corrida (2 quadros) e respiração quando parado.
+- **Personagem**: o Facefinho, com animação de corrida (2 quadros) e respiração quando parado.
 - **Cenário**: piso de ladrilhos brancos infinito, com mesas redondas espalhadas que bloqueiam
   o jogador e os inimigos (os inimigos contornam as mesas). O layout muda a cada partida.
 - **7 armas** (8 níveis cada), cada uma uma linguagem de programação: TypeScript, Dart, Bash, Lua, HTML/CSS, SQL e C.
@@ -58,7 +58,8 @@ Todas as imagens são arquivos prontos em `Assets/Resources`; nenhum gráfico é
 | `Sprites/Items/` | Gemas de XP (`GemBlue`, `GemGreen` e `GemRed`, conforme o valor), baú (`Chest`) e ímã (`Magnet`) |
 | `Sprites/Pixel/Coxinha.png` | Coxinha. Tudo em `Sprites/Pixel/` é importado sem suavização (pixel art) |
 | `Sprites/Effects/` | Partículas (`Dot`), aura do HTML/CSS (`Disc`), anéis de impacto (`Ring`), sombras (`Shadow`), golpe do Bash (`Slash`) e raios do SQL (`Lightning0` e `Lightning1`) |
-| `Audio/Soundtrack.mp3` | Música, tocada em loop |
+| `Audio/Menu.mp3` | Música do menu, tocada em loop |
+| `Audio/Soundtrack.mp3` | Música da partida (também nas lutas contra chefes), tocada em loop |
 
 Imagens novas em `Sprites/` ou `UI/` e músicas em `Audio/` são configuradas sozinhas ao serem importadas
 (`ProjectSetup.cs`). Para trocar uma imagem, substitua o PNG mantendo o mesmo nome.

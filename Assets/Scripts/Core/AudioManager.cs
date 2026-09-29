@@ -10,12 +10,15 @@ namespace FacefSurvivors
         Hurt, Heal, Lightning, Chest, BossAlarm, GameOver, Victory, Magnet, Bell
     }
 
-    /// <summary>Momentos com música. Hoje todos tocam a mesma trilha (Resources/Audio/Soundtrack).</summary>
+    /// <summary>
+    /// Momentos com música. O menu tem a própria faixa (Resources/Audio/Menu); a partida e os chefes
+    /// usam a mesma trilha (Resources/Audio/Soundtrack).
+    /// </summary>
     public enum MusicTrack { None, Menu, Game, Boss }
 
     /// <summary>
     /// Toca efeitos sonoros e a trilha sonora. Os efeitos são sintetizados em código (estilo chiptune);
-    /// a música é o arquivo Resources/Audio/Soundtrack, em loop.
+    /// as músicas são arquivos em Resources/Audio, tocados em loop.
     /// </summary>
     public class AudioManager : MonoBehaviour
     {
@@ -89,11 +92,13 @@ namespace FacefSurvivors
             src.Play();
         }
 
-        const string SoundtrackPath = "Audio/Soundtrack";
+        readonly Dictionary<string, AudioClip> music = new Dictionary<string, AudioClip>();
+
+        static string MusicPath(MusicTrack track) => track == MusicTrack.Menu ? "Audio/Menu" : "Audio/Soundtrack";
 
         /// <summary>
-        /// Liga (qualquer faixa) ou desliga (<see cref="MusicTrack.None"/>) a trilha. Como todas as faixas
-        /// usam a mesma música, trocar de uma para outra não a recomeça.
+        /// Liga (qualquer faixa) ou desliga (<see cref="MusicTrack.None"/>) a trilha. Se a música pedida
+        /// já está tocando (partida e chefe usam a mesma), ela continua sem recomeçar.
         /// </summary>
         public static void PlayMusic(MusicTrack track)
         {
@@ -103,16 +108,16 @@ namespace FacefSurvivors
                 am.musicSource.Stop();
                 return;
             }
-            if (am.musicSource.isPlaying) return;
-            if (am.musicSource.clip == null)
+            string path = MusicPath(track);
+            if (!am.music.TryGetValue(path, out var clip))
             {
-                am.musicSource.clip = Resources.Load<AudioClip>(SoundtrackPath);
-                if (am.musicSource.clip == null)
-                {
-                    Debug.LogError("Trilha sonora não encontrada em Resources: " + SoundtrackPath);
-                    return;
-                }
+                clip = Resources.Load<AudioClip>(path);
+                if (clip == null) Debug.LogError("Música não encontrada em Resources: " + path);
+                am.music[path] = clip;
             }
+            if (clip == null) return;
+            if (am.musicSource.clip == clip && am.musicSource.isPlaying) return;
+            am.musicSource.clip = clip;
             am.musicSource.Play();
         }
 

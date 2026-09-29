@@ -178,7 +178,7 @@ namespace FacefSurvivors
         {
             new CharacterDef
             {
-                Id = "mascote", Name = "Mascote FACEF",
+                Id = "mascote", Name = "Facefinho",
                 Description = "Uma pilha de livros com pernas. Pequeno, rápido e cheio de conhecimento.",
                 Bonus = "Equilibrado, sem pontos fracos.",
                 IdleSprite = "Sprites/Mascot_Idle", RunSprite = "Sprites/Mascot_Run",
